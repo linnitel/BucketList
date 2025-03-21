@@ -36,7 +36,7 @@ struct ContentView: View {
 						}
 					}
 				}
-				.mapStyle(.hybrid)
+				.mapStyle(viewModel.isHybrid ? .hybrid : .standard)
 				.onTapGesture { position in
 					if let coordinate = proxy.convert(position, from: .local) {
 						viewModel.addLocation(at: coordinate)
@@ -48,6 +48,13 @@ struct ContentView: View {
 					}
 				}
 			}
+			Button(viewModel.isHybrid ? "Standard" : "Hybrid") {
+				viewModel.isHybrid.toggle()
+			}
+			.padding()
+			.background(.blue)
+			.foregroundStyle(.white)
+			.clipShape(.capsule)
 		} else {
 			Button("Unlock places", action: viewModel.authenticate)
 				.padding()

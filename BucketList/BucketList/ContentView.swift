@@ -61,7 +61,11 @@ struct ContentView: View {
 				.background(.blue)
 				.foregroundStyle(.white)
 				.clipShape(.capsule)
+				.alert(isPresented: $viewModel.isAlertShown) {
+					return Alert(title: Text(viewModel.alertMessage ?? "Authentication failed"))
+				}
 		}
+
 	}
 }
 

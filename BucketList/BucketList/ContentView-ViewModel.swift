@@ -17,6 +17,8 @@ extension ContentView {
 		var selectedPlace: Location?
 		var isUnlocked = false
 		var isHybrid = false
+		var isAlertShown = false
+		var alertMessage: String?
 
 		let savePath = URL.documentsDirectory.appending(path: "SavedPlaces")
 
@@ -63,11 +65,13 @@ extension ContentView {
 					if sucsess {
 						self.isUnlocked = true
 					} else {
-
+						self.alertMessage = "Authentication failed because \(authenticationError?.localizedDescription ?? "")"
+						self.isAlertShown = true
 					}
 				}
 			} else {
-				
+				self.alertMessage = "\(error?.localizedDescription ?? "Authentication failed because this device doesn't support touch id")"
+				self.isAlertShown = true
 			}
 		}
 	}
